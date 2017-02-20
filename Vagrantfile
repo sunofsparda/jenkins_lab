@@ -14,7 +14,10 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "geerlingguy/centos7"
   config.vm.hostname = "epbyminw2473t144.minsk.epam.com"
-  # Disable automatic box update checking. If you disable this, then
+  config.vm.network "forwarded_port", guest: 80, host: 10080
+config.vm.network "forwarded_port", guest: 8080, host: 18080
+config.vm.network "forwarded_port", guest: 9090, host: 19090 
+ # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
