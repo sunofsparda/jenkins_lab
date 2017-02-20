@@ -31,13 +31,13 @@
 ### END INIT INFO
 
 # Check for missing binaries (stale symlinks should not happen)
-JENKINS_WAR="/opt/jenkins1/usr/lib/jenkins/jenkins.war"
+JENKINS_WAR="/usr/lib/jenkins/jenkins.war"
 test -r "$JENKINS_WAR" || { echo "$JENKINS_WAR not installed";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
 
 # Check for existence of needed config file and read it
-JENKINS_CONFIG=/opt/jenkins1/etc/sysconfig/jenkins
+JENKINS_CONFIG=/etc/sysconfig/jenkins
 test -e "$JENKINS_CONFIG" || { echo "$JENKINS_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
@@ -45,7 +45,7 @@ test -r "$JENKINS_CONFIG" || { echo "$JENKINS_CONFIG not readable. Perhaps you f
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
 
-JENKINS_PID_FILE="/opt/jenkins1/var/run/jenkins.pid"
+JENKINS_PID_FILE="/var/run/jenkins.pid"
 
 # Source function library.
 . /etc/init.d/functions
@@ -78,7 +78,7 @@ do
 done
 
 JAVA_CMD="$JENKINS_JAVA_CMD $JENKINS_JAVA_OPTIONS -DJENKINS_HOME=$JENKINS_HOME -jar $JENKINS_WAR"
-PARAMS="--logfile=/opt/jenkins1/var/log/jenkins/jenkins.log --webroot=/opt/jenkins1/var/cache/jenkins/war --daemon"
+PARAMS="--logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon"
 [ -n "$JENKINS_PORT" ] && PARAMS="$PARAMS --httpPort=$JENKINS_PORT"
 [ -n "$JENKINS_LISTEN_ADDRESS" ] && PARAMS="$PARAMS --httpListenAddress=$JENKINS_LISTEN_ADDRESS"
 [ -n "$JENKINS_HTTPS_PORT" ] && PARAMS="$PARAMS --httpsPort=$JENKINS_HTTPS_PORT"
@@ -92,7 +92,7 @@ PARAMS="--logfile=/opt/jenkins1/var/log/jenkins/jenkins.log --webroot=/opt/jenki
 [ -n "$JENKINS_ARGS" ] && PARAMS="$PARAMS $JENKINS_ARGS"
 
 if [ "$JENKINS_ENABLE_ACCESS_LOG" = "yes" ]; then
-    PARAMS="$PARAMS --accessLoggerClassName=winstone.accesslog.SimpleAccessLogger --simpleAccessLogger.format=combined --simpleAccessLogger.file=/opt/jenkins1/var/log/jenkins/access_log"
+    PARAMS="$PARAMS --accessLoggerClassName=winstone.accesslog.SimpleAccessLogger --simpleAccessLogger.format=combined --simpleAccessLogger.file=/var/log/jenkins/access_log"
 fi
 
 RETVAL=0
