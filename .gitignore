@@ -1,0 +1,9 @@
+# vagrant files
+box/
+.vagrant/
+
+# soft
+soft/
+
+# file browser dolphin files
+.directory
