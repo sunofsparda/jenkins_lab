@@ -23,6 +23,7 @@ git config --global user.email "sunofsparda@gmail.com"
 git remote add origin git@epbyminw2473t144:repos/anton_cherlyonok.git
 
 ### 5. Commit some initial files
+
 touch workflow_task2.sh.txt
 git add .
 git commit -m "1st commit"
