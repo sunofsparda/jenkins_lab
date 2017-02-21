@@ -1,0 +1,66 @@
+##### Task 1. Working with GIT
+### 1. Install GIT server
+yum install -y git
+### 2. Install GIT client – msysgit (optional for windows)
+### 3. Create repository in GIT (name of repository – your first and last name)
+#server
+useradd git
+passwd git #git
+su git
+mkdir ~/repos/
+cd ~/repos/
+git init --bare anton_cherlyonok.git
+
+#client
+mkdir task2
+cd task2
+git init
+git config --global user.name "Anton Cherlyonok"
+git config --global user.email "sunofsparda@gmail.com"
+
+
+### 4. Connect to repository with client
+git remote add origin git@epbyminw2473t144:repos/anton_cherlyonok.git
+
+### 5. Commit some initial files
+touch workflow_task2.sh.txt
+git add .
+git commit -m "1st commit"
+git push -u origin master
+
+### 6. Edit files and commit changes
+
+git commit -a -m "2nd commit"
+git push -u origin master
+
+### 7. Create branch from latest revision
+
+git pull
+git checkout -b dev
+
+### 8. Commit some changes to branch
+
+git add .
+git commit -m "commit to branch dev"
+git push -u origin dev
+
+### 9. Merge from branch into master
+
+git checkout master
+git pull origin master
+git merge dev
+git push origin master
+
+### 10. Tag latest revision (with some unique version)
+
+git tag -a v0.1 -m 'tag version 0.1'
+#make changes 1
+
+git tag -a v0.2 -m 'tag version 0.2'
+#make changes 2
+
+git tag -a v1.0 -m 'tag version 1.0'
+#final
+
+### 11. Create Jenkins job and specify GIT URL in SCM section. Run build – it should clone GIT project
+
