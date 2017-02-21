@@ -43,6 +43,10 @@ systemclt enable httpd
 ### 7. Crete free-style job with simple build step to output some message to console. Trigger build. Configure job to be build periodically.
 ### 8. Setup Jenkins job to build of any selected open-source project. Output should be some package (artifact). Project could be even archiving of random files – this will be enough for completion.
 ### 9. Install second instance of Jenkins on the same server. Provide access through Apache web server
+mkdir /opt/jenkins1
+cp --parents -R /etc/sysconfig/jenkins /etc/init.d/jenkins /etc/rc.d/init.d/jenkins /etc/logrotate.d/jenkins /var/lib/jenkins /var/log/jenkins /var/cache/jenkins /usr/lib/jenkins /opt/jenkins1
+chown jenkins:jenkins -R /opt/jenkins1
+chmod 755 -R /opt/jenkins1
 
 #temp
 epbyminw2473t144/jenkins0
