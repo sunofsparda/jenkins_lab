@@ -54,6 +54,6 @@ Vagrant.configure("2") do |config|
     end
   end
 
-# config.vm.provision "shell", path: "install/tomcat_setup.sh"
+ config.vm.provision "shell", path: "install/jenkins/init_jenkins.sh"
  
 end
