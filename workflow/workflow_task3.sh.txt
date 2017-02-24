@@ -1,0 +1,26 @@
+### 1. Install Ant
+wget http://ftp.byfly.by/pub/apache.org//ant/binaries/apache-ant-1.10.1-bin.tar.gz
+tar -xf apache-ant-1.10.1-bin.tar.gz
+mkdir /opt/ant
+mv apache-ant-1.10.1 /opt/ant/
+ln -s /opt/ant/apache-ant-1.10.1 /opt/ant/current
+ln -s /opt/ant/current/bin/ant /usr/bin/
+
+#add to .bashrc
+export ANT_HOME=/opt/ant/current
+export JAVA_HOME=/usr/java/jdk1.8.0_121
+export PATH=${PATH}:${ANT_HOME}/bin
+
+### 2. Fork Github sample project https://github.com/yahor-chupin-epam/mtn-projects
+
+git clone https://github.com/sunofsparda/mtn-projects.git
+
+
+3. Find “ant-task” project inside Module 3 and explore its structure
+4. Implement build.xml script to clean, compile, test, create jar file and distribution artifact
+
+
+
+5. Push changes to your Github repository
+
+6. Setup Jenkins job to build from repository (poll SCM)

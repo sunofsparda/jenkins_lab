@@ -1,0 +1,25 @@
+### 1. Install Maven
+wget http://ftp.byfly.by/pub/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+tar -xf apache-maven-3.3.9-bin.tar.gz
+mkdir /opt/maven
+mv apache-maven-3.3.9 /opt/maven/
+ln -s /opt/maven/apache-maven-3.3.9 /opt/maven/current
+#ln -s ln -s /opt/maven/current/bin/mvn /usr/bin/
+
+#add to .bashrc
+export MAVEN_HOME=/opt/maven/current
+export JAVA_HOME=/usr/java/jdk1.8.0_121
+export PATH=${PATH}:${MAVEN_HOME}/bin
+
+### 2. Fork Github sample project https://github.com/yahor-chupin-epam/mtn-projects
+git clone https://github.com/sunofsparda/mtn-projects.git
+
+3. Find “ant-task” project inside Module 3 and explore its structure
+4. Implement pom.xml script to clean, compile, test, create jar file and distribution artifact
+
+	
+
+5. Push changes to your Github repository
+
+6. Setup Jenkins job to build from repository (poll SCM)
+
