@@ -31,8 +31,9 @@ Vagrant.configure("2") do |config|
     jenkins_m0.vm.box = "geerlingguy/centos7"
     jenkins_m0.vm.hostname = "epbyminw2473t00jmaster0.minsk.epam.com"
     jenkins_m0.vm.network "private_network", type: "dhcp"
+    jenkins_m0.vm.network "forwarded_port", guest: 8080, host: 28080
     jenkins_m0.vm.provider :virtualbox do |vb|
-      vb.memory = "2048"
+     vb.memory = "2048"
     end
   end
 
