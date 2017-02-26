@@ -20,6 +20,10 @@ yum localinstall -y *
 firewall-cmd --add-port=8080/tcp --zone=public --permanent
 firewall-cmd --reload
 
+### Enable and start jenkins
+systemctl enable jenkins
+systemctl restart jenkins
+
 
 ### Generate ssh keys
 #sudo -u jenkins ssh-keygen
