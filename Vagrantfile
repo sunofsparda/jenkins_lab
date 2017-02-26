@@ -34,6 +34,7 @@ Vagrant.configure("2") do |config|
     jenkins_s0.vm.provider :virtualbox do |vb|
       vb.memory = "2048"
     end
+    jenkins_s0.vm.provision "shell", path: "install/jenkins/provision_jenkins_slave.sh"
   end  
 
   config.vm.define "jenkins-slave1" do |jenkins_s1|
@@ -43,6 +44,7 @@ Vagrant.configure("2") do |config|
     jenkins_s1.vm.provider :virtualbox do |vb|
       vb.memory = "2048"
     end
+    jenkins_s1.vm.provision "shell", path: "install/jenkins/provision_jenkins_slave.sh"
   end
 
  config.vm.define "jenkins-master0" do |jenkins_m0|
@@ -53,7 +55,7 @@ Vagrant.configure("2") do |config|
     jenkins_m0.vm.provider :virtualbox do |vb|
      vb.memory = "2048"
     end
-    jenkins_m0.vm.provision "shell", path: "install/jenkins/init_jenkins.sh"
+    jenkins_m0.vm.provision "shell", path: "install/jenkins/provision_jenkins_master.sh"
   end
  
 end
