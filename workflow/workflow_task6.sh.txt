@@ -1,0 +1,87 @@
+### 1. Install and configure PostrgeSQL
+# install
+wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+yum localinstall -y pgdg-centos96-9.6-3.noarch.rpm
+yum install -y postgresql96 postgresql96-contrib postgresql96-libs postgresql96-server
+# initdb and configure service autostart
+/usr/pgsql-9.6/bin/postgresql96-setup initdb
+systemctl enable postgresql-9.6	
+systemctl start postgresql-9.6
+
+# By default, PostgreSQL does not allow password authentication. change that by editing its host-based authentication (HBA) configuration. replace "ident" with "md5"
+vim /var/lib/pgsql/data/pg_hba.conf
+
+# Create db and user in PostgreSQL
+su - postgres
+psql
+CREATE USER sonar PASSWORD 'sonar';
+CREATE DATABASE sonar OWNER sonar;
+\
+exit
+# Create user for sonar
+#useradd sonar
+#passwd sonar #sonar
+
+# Restart sql
+systemctl restart postgresql-9.6
+
+### 2. Install and configure Sonar server
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.6.zip
+unzip sonarqube-5.6.6.zip
+mv sonarqube-5.6.6 /opt/sonar/
+#chown sonar:sonar -R /opt/sonar
+#su - sonar #sonar
+
+
+vim /opt/sonar/conf/sonar.properties
+#sonar.properties
+# Setting the access to the Database
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:postgresql://localhost/sonar 
+# Setting the Web Server
+sonar.web.host=172.28.128.5
+sonar.web.port=9000
+#sonar.web.context=/sonar
+#/sonar.properties
+
+cd /opt/sonar/bin/linux-x86-64/
+./sonar.sh start
+
+
+### 3. Configure Sonar with Apache web server so that it accessible via http://hostname
+# Moving sonar to backend and remove web.context=/sonar
+sed -i 's/sonar.web.host=172.28.128.5/sonar.web.host=127.0.0.1/g' /opt/sonar/conf/sonar.properties
+#!!! remove web.context=/sonar
+
+# Install and configure httpd
+yum install -y httpd
+vim /etc/httpd/conf.d/vhosts.conf
+#vhosts.conf
+<VirtualHost *:80>
+        servername sonar
+        proxypass / http://127.0.0.1:9000/
+        proxypassreverse / http://127.0.0.1:9000/
+</VirtualHost>
+#/vhosts.conf
+
+
+### 4. Configure Sonar security – limit anonymous access to instance
+# 
+
+
+
+### 5. Configure Jenkins for Sonar analysis
+
+
+### 6. Create Sonar analysis profile and add/modify/remove a couple of rules. Set is as the default profile
+
+
+### 7. Choose some open-source project for building with Jenkins and create a regular build job
+### 8. Add Sonar analysis in Jenkins job configuration.
+### 9. Add some lines in the code and Run configured job several times to see the difference
+
+
+
+
+
