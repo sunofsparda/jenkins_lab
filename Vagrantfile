@@ -57,5 +57,9 @@ Vagrant.configure("2") do |config|
     end
     jenkins_m0.vm.provision "shell", path: "install/jenkins/provision_jenkins_master.sh"
   end
- 
+  
+  config.vm.provision "shell", inline: <<-SHELL
+    timedatectl set-timezone Europe/Minsk
+  SHELL
+
 end
