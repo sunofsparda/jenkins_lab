@@ -30,7 +30,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "jenkins-slave0" do |jenkins_s0|
     jenkins_s0.vm.box = "geerlingguy/centos7"
     jenkins_s0.vm.hostname = "epbyminw2473t10jslave0.minsk.epam.com"
-    jenkins_s0.vm.network "private_network", type: "dhcp"
+#    jenkins_s0.vm.network "private_network", type: "dhcp"
+    jenkins_s0.vm.network "private_network", ip:"172.28.128.3"
     jenkins_s0.vm.provider :virtualbox do |vb|
       vb.memory = "2048"
     end
@@ -40,7 +41,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "jenkins-slave1" do |jenkins_s1|
     jenkins_s1.vm.box = "geerlingguy/centos7"
     jenkins_s1.vm.hostname = "epbyminw2473t11jslave1.minsk.epam.com"
-    jenkins_s1.vm.network "private_network", type: "dhcp"
+#    jenkins_s1.vm.network "private_network", type: "dhcp"
+    jenkins_s1.vm.network "private_network", ip:"172.28.128.4"
     jenkins_s1.vm.provider :virtualbox do |vb|
       vb.memory = "2048"
     end
@@ -50,7 +52,8 @@ Vagrant.configure("2") do |config|
  config.vm.define "jenkins-master0" do |jenkins_m0|
     jenkins_m0.vm.box = "geerlingguy/centos7"
     jenkins_m0.vm.hostname = "epbyminw2473t00jmaster0.minsk.epam.com"
-    jenkins_m0.vm.network "private_network", type: "dhcp"
+#    jenkins_m0.vm.network "private_network", type: "dhcp"
+    jenkins_m0.vm.network "private_network", ip:"172.28.128.5"
     jenkins_m0.vm.network "forwarded_port", guest: 8080, host: 28080
     jenkins_m0.vm.provider :virtualbox do |vb|
      vb.memory = "2048"
