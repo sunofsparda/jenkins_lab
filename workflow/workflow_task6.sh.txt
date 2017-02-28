@@ -18,10 +18,11 @@ CREATE USER sonar PASSWORD 'sonar';
 CREATE DATABASE sonar OWNER sonar;
 \
 exit
-# Create user for sonar
+#########NOT NEED####################
+# Create system sonar user
 #useradd sonar
 #passwd sonar #sonar
-
+#####################################
 # Restart sql
 systemctl restart postgresql-9.6
 
@@ -67,21 +68,8 @@ vim /etc/httpd/conf.d/vhosts.conf
 
 
 ### 4. Configure Sonar security – limit anonymous access to instance
-# 
-
-
-
 ### 5. Configure Jenkins for Sonar analysis
-
-
 ### 6. Create Sonar analysis profile and add/modify/remove a couple of rules. Set is as the default profile
-
-
 ### 7. Choose some open-source project for building with Jenkins and create a regular build job
 ### 8. Add Sonar analysis in Jenkins job configuration.
 ### 9. Add some lines in the code and Run configured job several times to see the difference
-
-
-
-
-
