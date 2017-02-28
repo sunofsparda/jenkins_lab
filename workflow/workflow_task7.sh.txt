@@ -1,0 +1,42 @@
+Task
+1. Install and configure Nexus server. 
+#wget Nexus
+tar -xvf /vagrant/soft/nexus-3.2.1-01-unix.tar.gz 
+mv nexus-3.2.1-01/ sonatype-work/ /opt/
+mv /opt/nexus-3.2.1-01 /opt/nexus
+vim /opt/sonatype-work/nexus3/etc/nexus.properties 
+##########################
+# Jetty section
+ application-port=8081
+ application-host=127.0.0.1
+# nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
+# nexus-context-path=/
+
+# Nexus section
+# nexus-edition=nexus-pro-edition
+# nexus-features=\
+#  nexus-pro-feature
+#########################
+useradd nexus
+
+2. Configure Apache so that access to Nexus is via http://hostname
+
+
+3. Configure Jenkins/Maven to use Nexus server for all Maven artifact downloads
+4. Choose some open-source project for building with Jenkins (example - https://github.com/jenkinsci/jenkins). Requirement to this project – it should be Maven-based.
+5. Configure build section (Maven build) – should create some artifact
+6. Nexus should be used as Maven dependency proxy. 
+7. Archive created artifact
+8. Upload artifact to Nexus
+
+Description
+1. Nexus server is installed as service
+2. Nexus is accessible via http://hostname
+3. Jenkins local maven repository is configured to use local Nexus server.
+4. There is Jenkins job created to build from VCS
+5. Build cleanup is configured
+6. Parameter is configured and printed during build execution
+7. When Nexus is stopped and .m2 is cleared – build is failing as dependencies can’t be downloaded
+8. Build is creating artifact (during Maven build)
+9. Artifact is archived (visible on the build page)
+10. Artifact is uploaded to Nexus
